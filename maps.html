@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    
     <title>Cities Design</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,24 +25,28 @@
         </div>
         <div class="description">
             <h1>Welcome to the Map of Berlin city</h1>
-            <p class="par">
-                Berlin is the capital and largest city if Germany by both Area and population <br>
-                it has a population of 3.7 million inhabitants make it the Europen unions most populous city.<br>
-                The Website is under construction.
-            </p>
+            <p class="par">Berlin is the capital and largest city if Germany by both Area and population <br> it has a population of 3.7 million inhabitants make it the Europen unions most populous city.<br> The Website is under construction.</p>
 
         </div>
 
-        // Adding centred map of Berlin
-        <p style="text-align:center;">
-        <iframe width="700" 
-                height="550" 
-                style="border:0" 
-                loading="lazy" 
-                allowfullscreen 
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJAVkDPzdOqEcRcDteW0YgIQQ&key=AIzaSyAlKejikTyCsJENnzd33wDYEpyHBjanYpQ">
-        </iframe>
-        </p>
+        <style>
+            #map {
+                height: 600px;
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+        <div id="map"></div>
+        <script>
+		function initMap() {
+			let berlin = { lat: 52.518, lng: 13.408 };
+			let map = new google.maps.Map(
+				document.getElementById('map'), { zoom: 12, center: berlin }
+			);
+			let marker = new google.maps.Marker({position: berlin, map: map})
+		}
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZtGX6yWJVdGJHYm9zVEk5m8vSWEcqaY&callback=initMap&v=weekly"></script>
 </body>
 </html>
-
