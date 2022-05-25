@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Add Map</title>
+  </head>
+  <body>
+  
+  <style>
+	#map {
+	  height: 400px;
+	  width: 70%;
+	}
+  </style>
+	<h3> testing simple map</h3>
+    <div id="map"></div>
+	<script>
+		function initMap() {
+			let berlin = { lat: 52.518, lng: 13.408 };
+			let map = new google.maps.Map(
+				document.getElementById('map'), { zoom: 12, center: berlin }
+			);
+			let marker = new google.maps.Marker({position: berlin, map: map})
+		}
+	</script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZtGX6yWJVdGJHYm9zVEk5m8vSWEcqaY&callback=initMap&v=weekly"></script>
+</body>
+</html>
+
+
+-- Go back to all in one version
+-- combine into c# using thr body
+-- 
