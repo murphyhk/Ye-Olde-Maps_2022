@@ -4,20 +4,22 @@ let historicalOverlay;
 const berlin = { lat: 52.518, lng: 13.408 };
 
 // ---------	BUTTONS		---------
-function CenterControl(controlDiv, map) {
+function CenterLeftControl(controlDiv, map) {
+	
+	// BUTTON PRE WORLD WAR 2	
 	// Set CSS for the control border.
-	const controlUI = document.createElement("div");
+	const preWWIIButton = document.createElement("div");
 
-	controlUI.style.backgroundColor = "#fff";
-	controlUI.style.border = "2px solid #fff";
-	controlUI.style.borderRadius = "3px";
-	controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-	controlUI.style.cursor = "pointer";
-	controlUI.style.marginTop = "8px";
-	controlUI.style.marginBottom = "22px";
-	controlUI.style.textAlign = "center";
-	controlUI.title = "Click to change the map";
-	controlDiv.appendChild(controlUI);
+	preWWIIButton.style.backgroundColor = "#fff";
+	preWWIIButton.style.border = "2px solid #fff";
+	preWWIIButton.style.borderRadius = "10px";
+	preWWIIButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+	preWWIIButton.style.cursor = "pointer";
+	preWWIIButton.style.marginTop = "8px";
+	preWWIIButton.style.marginBottom = "22px";
+	preWWIIButton.style.textAlign = "center";
+	preWWIIButton.title = "Click to change the map";
+	controlDiv.appendChild(preWWIIButton);
 
 	// Set CSS for the control interior.
 	const controlText = document.createElement("div");
@@ -28,17 +30,96 @@ function CenterControl(controlDiv, map) {
 	controlText.style.lineHeight = "38px";
 	controlText.style.paddingLeft = "5px";
 	controlText.style.paddingRight = "5px";
-	controlText.innerHTML = "Change Map";
-	controlUI.appendChild(controlText);
+	controlText.innerHTML = "Pre WWII";
+	preWWIIButton.appendChild(controlText);
 
 
 	// ---------	Switching the overlay image for this Button		---------
 	// Setup the click event listeners: simply set the map to berlin.
-	controlUI.addEventListener("click", () => {
-		historicalOverlay1.setMap(map)
+	preWWIIButton.addEventListener("click", () => {
+		duringWar.setMap(null);
+		postWar.setMap(null);
+		preWar.setMap(map);
 	});
+	
 }
 
+// ---------	BUTTONS		---------
+function CenterRightControl(controlDiv, map) {
+	
+	// BUTTON POST WORLD WAR 2	
+	// Set CSS for the control border.
+	const PostWarButton = document.createElement("div");
+
+	PostWarButton.style.backgroundColor = "#fff";
+	PostWarButton.style.border = "2px solid #fff";
+	PostWarButton.style.borderRadius = "10px";
+	PostWarButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+	PostWarButton.style.cursor = "pointer";
+	PostWarButton.style.marginTop = "8px";
+	PostWarButton.style.marginBottom = "22px";
+	PostWarButton.style.textAlign = "center";
+	PostWarButton.title = "Click to change the map";
+	controlDiv.appendChild(PostWarButton);
+
+	// Set CSS for the control interior.
+	const controlText2 = document.createElement("div");
+
+	controlText2.style.color = "rgb(25,25,25)";
+	controlText2.style.fontFamily = "Roboto,Arial,sans-serif";
+	controlText2.style.fontSize = "16px";
+	controlText2.style.lineHeight = "38px";
+	controlText2.style.paddingLeft = "5px";
+	controlText2.style.paddingRight = "5px";
+	controlText2.innerHTML = "Post WWII";
+	PostWarButton.appendChild(controlText2);
+
+
+	// ---------	Switching the overlay image for this Button		---------
+	// Setup the click event listeners: simply set the map to berlin.
+	PostWarButton.addEventListener("click", () => {
+		duringWar.setMap(null);
+		preWar.setMap(null);
+		postWar.setMap(map);
+	});
+	
+}
+
+function CenterControl(controlDiv, map) {
+	// BUTTON DURING WORLD WAR 2	
+	// Set CSS for the control border.
+	const duringWarButton = document.createElement("div");
+
+	duringWarButton.style.backgroundColor = "#fff";
+	duringWarButton.style.border = "2px solid #fff";
+	duringWarButton.style.borderRadius = "10px";
+	duringWarButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+	duringWarButton.style.cursor = "pointer";
+	duringWarButton.style.marginTop = "8px";
+	duringWarButton.style.marginBottom = "22px";
+	duringWarButton.style.textAlign = "center";
+	duringWarButton.title = "Click to change the map";
+	controlDiv.appendChild(duringWarButton);
+	// Set CSS for the control interior.
+	const controlText1 = document.createElement("div");
+
+	controlText1.style.color = "rgb(25,25,25)";
+	controlText1.style.fontFamily = "Roboto,Arial,sans-serif";
+	controlText1.style.fontSize = "16px";
+	controlText1.style.lineHeight = "38px";
+	controlText1.style.paddingLeft = "5px";
+	controlText1.style.paddingRight = "5px";
+	controlText1.innerHTML = "During WWII";
+	duringWarButton.appendChild(controlText1);
+	
+	// ---------	Switching the overlay image for this Button		---------
+	// Setup the click event listeners: simply set the map to berlin.
+	duringWarButton.addEventListener("click", () => {
+		preWar.setMap(null);
+		postWar.setMap(null);
+		duringWar.setMap(map);
+	});
+}
 // ---------	MAPS	---------
 function initMap() {
 
@@ -60,18 +141,29 @@ function initMap() {
 		east: 13.588,
 		west: 13.228,
 	};
+	// The coordinates for the top-right, bottom-left for map = historicalOverlay1
+	let imageBounds2 = {
+		north: 52.560,
+		south: 52.500,
+		east: 13.528,
+		west: 13.408,
+	};
 
-	// The loading code for the second map image
-	historicalOverlay1 = new google.maps.GroundOverlay(
+	// The loading code for the pre war map image
+	preWar = new google.maps.GroundOverlay(
 		"https://i.pinimg.com/564x/52/2e/13/522e1301861a009124eb2694c461181d.jpg", imageBounds1
 	);
-	// The loding code for the first map image
-	historicalOverlay = new google.maps.GroundOverlay(
+	// The loding code for the during war map image
+	duringWar = new google.maps.GroundOverlay(
 		"berlinTestMap.jpg", imageBounds
 	);
+	// The loding code for the post war map image
+	postWar = new google.maps.GroundOverlay(
+		"berlinTestMap2.jpg", imageBounds2
+	);
 	
-	// Set the map overlay to being with historicalOverlay
-	historicalOverlay.setMap(map);
+	// Set the map overlay to start on during war image
+	duringWar.setMap(map);
 
 	// ---------	CONTENTS MARKERS	---------
 	const contentString =
@@ -102,7 +194,16 @@ function initMap() {
 	// ---------	BUTTON IMPLEMENTATIONS ---------
 	// Create the DIV to hold the control and call the CenterControl()
 	// constructor passing in this DIV.
+	
+	const centerLeftControlDiv = document.createElement("div");
+	CenterLeftControl(centerLeftControlDiv, map);
+	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerLeftControlDiv);
+	
 	const centerControlDiv = document.createElement("div");
 	CenterControl(centerControlDiv, map);
 	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+	
+	const centerRightControlDiv = document.createElement("div");
+	CenterRightControl(centerRightControlDiv, map);
+	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerRightControlDiv);
 }
