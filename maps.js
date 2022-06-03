@@ -207,3 +207,13 @@ function initMap() {
 	CenterRightControl(centerRightControlDiv, map);
 	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerRightControlDiv);
 }
+
+
+// // References
+
+// Google Maps Platform Documentation | Maps JavaScript API. (n.d.). Retrieved from Google Developers website: https://developers.google.com/maps/documentation/javascript
+
+// Google Maps Javascript API Copyright:
+// Portions of this page are modifications based on work created and shared by Google and used according to terms described in the Creative Commons 4.0 Attribution License.
+
+
