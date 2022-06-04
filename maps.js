@@ -170,6 +170,95 @@ function initMap() {
 	duringWar.setMap(map);
 
 	// ---------	CONTENTS MARKERS	---------
+
+	// // The name, latitude and longitude of the three chosen locations 
+	// var markers = [
+	// 	['Reichstag', 52.518623, 13.376198],
+	// 	['Pergamonmuseum', 52.521183, 13.3969],
+	// 	['Brandenburg', 52.516266, 13.377775]
+	//   ];
+
+	// // InfoWindow content for the pre war markers
+	// var infoWindowPreWar = [
+    // 	['<div class="info_content">' +
+    // 	'<h3>Reichstag</h3>' +
+    // 	'<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>' +
+	// 	'<img src="https://images.adsttc.com/media/images/5624/75e8/e58e/cec3/c400/0353/newsletter/Bundesarchiv_Bild_102-13744__Berlin__Reichstag__Verfassungsfeier.jpg?1445230051" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="https://i0.wp.com/rylandscollections.com/wp-content/uploads/2015/04/reichstag_thumb.jpg?ssl=1" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2016/08/1024px-1895_reichstagsgebaeude.jpg" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'</div>'
+	// 	],
+	// 	['<div class="info_content">' +
+  	//   	'<h3>Mumbai</h3>' +
+   	// 	'<p>Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>' +'</div>'],
+	// 	['<div class="info_content">' +
+   	// 	'<h3>Mumbai</h3>' +
+   	// 	'<p>Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>' +'</div>'],
+	// ];
+
+	//   // InfoWindow content for the during war markers
+	//   var infoWindowWar = [
+    // 	['<div class="info_content">' +
+    // 	'<h3>Reichstag</h3>' +
+    // 	'<p>The <b>Reichstag Building</b> was burned down on Feburary 27th 1933, exactly four weeks after the swearing in of Adolf Hitler as Chancellor of Germany </p>' +
+	// 	'<img src="https://th-thumbnailer.cdn-si-edu.com/xlo7wE5K64ZZmTytx87JpjnMnT8=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/5a/cf/5acf1c49-c598-40f7-8f35-8d282a43536e/reichstagsbrand-web.jpg" width="200" height="200" alt="Reichstag Building - 1933">' +
+	// 	'<img src="https://www.facinghistory.org/sites/default/files/Ch05_Image07.JPG?timestamp=1645757978" width="200" height="200" alt="Reichstag Building - 1933">' +
+	// 	'<img src="https://qph.cf2.quoracdn.net/main-qimg-3ca083a30ba9db67b2c5f19d716b0936.webp " width="200" height="200" alt="Reichstag Building - 1933">' +
+	// 	'</div>'
+	// 	],
+	// 	['<div class="info_content">' +
+	// 	'<h3>Mumbai</h3>' +
+	//    	'<p>Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>' +'</div>'],
+	// 	['<div class="info_content">' +
+	//    	'<h3>Mumbai</h3>' +
+	//    	'<p>Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>' +'</div>'],
+	// ];
+
+	//   // InfoWindow content for the post war markers
+	//   var infoWindowPostWar = [
+    // 	['<div class="info_content">' +
+    // 	'<h3>Reichstag</h3>' +
+    // 	'<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'</div>'
+	// 	],
+	// 	['<div class="info_content">' +
+    // 	'<h3>Reichstag</h3>' +
+    // 	'<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'<img src="" width="200" height="200" alt="Reichstag Building - Pre 1933">' +
+	// 	'</div>'
+	// 	],
+	// 	['<div class="info_content">' +
+	// 	'<h3>Mumbai</h3>' +
+	//    	'<p>Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>' +'</div>'],
+	// ];
+
+	// // Loop through our array of markers & place each one on the map  
+	// for( i = 0; i < markers.length; i++ ) {
+		
+	// 	var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+
+    // 	marker = new google.maps.Marker({
+    //     	position: position,
+    //     	map: map,
+    //     	title: markers[i][0]
+    // 	});
+
+	// 	// Each marker to have an info window    
+	// 	google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	// 		return function() {
+	// 			infoWindow.setContent(infoWindowPreWar[i]);
+	// 			infoWindow.open(map, marker);
+	// 		}
+	// 	})(marker, i));
+
+	// }
+
+	// Content inside the marker infowindow
 	const contentString =
 		'<div id="content">' +
 		'<div id="siteNotice">' +
