@@ -1,7 +1,11 @@
 // ---------	INITIAL SETUP	---------
 let historicalOverlay;
+
 // The coordinates for Berlin city centre
 const berlin = { lat: 52.518, lng: 13.408 };
+
+// Coordinates for map markers
+const reichstag = { lat: 52.518623, lng: 13.376198 }; // Reichstag building
 
 // ---------	BUTTONS		---------
 function CenterLeftControl(controlDiv, map) {
@@ -157,7 +161,7 @@ function initMap() {
 	duringWar = new google.maps.GroundOverlay(
 		"berlinTestMap.jpg", imageBounds
 	);
-	// The loding code for the post war map image
+	// The loading code for the post war map image
 	postWar = new google.maps.GroundOverlay(
 		"berlinTestMap2.jpg", imageBounds2
 	);
@@ -170,18 +174,22 @@ function initMap() {
 		'<div id="content">' +
 		'<div id="siteNotice">' +
 		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Berlin</h1>' +
+		'<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
 		'<div id="BodyContent">' +
-		"<p><b>Berlin</b>, the capital of Germany</p>" +
+		"<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>" +
+		"<img src='https://images.adsttc.com/media/images/5624/75e8/e58e/cec3/c400/0353/newsletter/Bundesarchiv_Bild_102-13744__Berlin__Reichstag__Verfassungsfeier.jpg?1445230051' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+		"<img src='https://i0.wp.com/rylandscollections.com/wp-content/uploads/2015/04/reichstag_thumb.jpg?ssl=1' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+		"<img src='https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2016/08/1024px-1895_reichstagsgebaeude.jpg' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
 		"</div>" +
 		"</div>";
 	const infowindow = new google.maps.InfoWindow({
-		content: contentString,
+		content: contentString
+
 	});
 	const marker = new google.maps.Marker({
-		position: berlin,
+		position: reichstag,
 		map,
-		title: "Berlin City",
+		title: "Reichstag Bulding",
 	});
 	marker.addListener("click", () => {
 		infowindow.open({
