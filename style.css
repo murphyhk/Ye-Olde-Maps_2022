@@ -149,38 +149,6 @@ ul li a:hover{
     letter-spacing: 2px;
 }
 
-.about{
-    width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image2.jpg.jpg) ;
-    background-position: center;
-    background-size: cover;
-    height: 109vh;
-}
-
-.about{
-    width: 1200px;
-    height: auto;
-    margin: auto;
-    color: #fff;
-    position: relative;
-
-}
-.about{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    font-family: 'Times New Roman';
-    letter-spacing: 1.2px;
-    line-height: 30px;
-
-}
-
-.about h1{
-    font-family: 'Times New Roman';
-    font-size: 50px;
-    padding-left: 20px;
-    margin-top: 9%;
-    letter-spacing: 2px;
-}
 
 .contacts{
     width: 100%;
@@ -188,24 +156,9 @@ ul li a:hover{
     background-position: center;
     background-size: cover;
     height: 109vh;
+    color: white;
 }
 
-.contacts{
-    width: 1200px;
-    height: auto;
-    margin: auto;
-    color: #fff;
-    position: relative;
-
-}
-.contacts{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    font-family: 'Times New Roman';
-    letter-spacing: 1.2px;
-    line-height: 30px;
-
-}
 
 .contacts h1{
     font-family: 'Times New Roman';
@@ -222,6 +175,24 @@ ul li a:hover{
     background-size: cover;
     height: 109vh;
 }
+
+.about{
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image1.jpg.jpg) ;
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
+    color: white;
+}
+.about h1{
+    font-family: 'Times New Roman';
+    font-size: 80px;
+    padding-left: 20px;
+    margin-top: 9%;
+    letter-spacing: 2px;
+}
+
+
 #map {
 	height: 600px;
 	width: 60%;
