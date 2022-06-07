@@ -155,7 +155,7 @@ function initMap() {
 
 	// The loading code for the pre war map image
 	preWar = new google.maps.GroundOverlay(
-		"https://i.pinimg.com/564x/52/2e/13/522e1301861a009124eb2694c461181d.jpg", imageBounds1
+		"https://upload.wikimedia.org/wikipedia/commons/3/39/Kiessling%27s_Neuer_kleiner_Plan_von_Berlin_1898_B.jpg", imageBounds1
 	);
 	// The loding code for the during war map image
 	duringWar = new google.maps.GroundOverlay(
