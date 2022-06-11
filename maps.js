@@ -7,6 +7,13 @@ const berlin = { lat: 52.518, lng: 13.408 };
 // Coordinates for map markers
 const reichstag = { lat: 52.518623, lng: 13.376198 }; // Reichstag building
 
+const BERLIN_BOUNDS = {			// Map boundaires
+				north: 52.700,
+				south: 52.300,
+				east: 13.600,
+				west: 13.200,
+			};
+
 // ---------	BUTTONS		---------
 function CenterLeftControl(controlDiv, map) {
 	
@@ -128,8 +135,7 @@ function CenterControl(controlDiv, map) {
 function initMap() {
 
 	let map = new google.maps.Map(
-		document.getElementById('map'), { zoom: 12, center: berlin }
-	);
+		document.getElementById('map'), { zoom: 12, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
 
 	// The coordinates for the top-right, bottom-left for map = historicalOverlay
 	let imageBounds = {
