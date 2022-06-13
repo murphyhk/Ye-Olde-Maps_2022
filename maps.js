@@ -159,11 +159,11 @@ function initMap() {
 	);
 	// The loding code for the during war map image
 	duringWar = new google.maps.GroundOverlay(
-		"berlinTestMap.jpg", imageBounds
+		"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/1945_Soviet_map_of_Berlin.jpg/2411px-1945_Soviet_map_of_Berlin.jpg", imageBounds
 	);
 	// The loading code for the post war map image
 	postWar = new google.maps.GroundOverlay(
-		"berlinTestMap2.jpg", imageBounds2
+		"https://upload.wikimedia.org/wikipedia/commons/3/34/The_Berlin_region._LOC_90682667_%28cropped%29.jpg", imageBounds2
 	);
 	
 	// Set the map overlay to start on during war image
