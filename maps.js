@@ -96,6 +96,46 @@ function CenterRightControl(controlDiv, map) {
 	
 }
 
+function ClearControl(controlDiv, map) {
+	
+	// BUTTON CLEAR
+	// Set CSS for the control border.
+	const clearButton = document.createElement("div");
+
+	clearButton.style.backgroundColor = "#fff";
+	clearButton.style.border = "2px solid #fff";
+	clearButton.style.borderRadius = "10px";
+	clearButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+	clearButton.style.cursor = "pointer";
+	clearButton.style.marginTop = "8px";
+	clearButton.style.marginBottom = "22px";
+	clearButton.style.textAlign = "center";
+	clearButton.title = "Click to clear the map";
+	controlDiv.appendChild(clearButton);
+
+	// Set CSS for the control interior.
+	const controlText2 = document.createElement("div");
+
+	controlText2.style.color = "rgb(25,25,25)";
+	controlText2.style.fontFamily = "Roboto,Arial,sans-serif";
+	controlText2.style.fontSize = "16px";
+	controlText2.style.lineHeight = "38px";
+	controlText2.style.paddingLeft = "5px";
+	controlText2.style.paddingRight = "5px";
+	controlText2.innerHTML = "Clear Map";
+	clearButton.appendChild(controlText2);
+
+
+	// ---------	Switching the overlay image for this Button		---------
+	// Setup the click event listeners: simply set the map to berlin.
+	clearButton.addEventListener("click", () => {
+		duringWar.setMap(null);
+		preWar.setMap(null);
+		postWar.setMap(null);
+	});
+	
+}
+
 function CenterControl(controlDiv, map) {
 	// BUTTON DURING WORLD WAR 2	
 	// Set CSS for the control border.
@@ -135,7 +175,7 @@ function CenterControl(controlDiv, map) {
 function initMap() {
 
 	let map = new google.maps.Map(
-		document.getElementById('map'), { zoom: 12, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
+		document.getElementById('map'), { zoom: 10, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
 
 	// The coordinates for the top-right, bottom-left for map = historicalOverlay
 	let imageBounds = {
@@ -300,15 +340,19 @@ function initMap() {
 	
 	const centerLeftControlDiv = document.createElement("div");
 	CenterLeftControl(centerLeftControlDiv, map);
-	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerLeftControlDiv);
+	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerLeftControlDiv);
 	
 	const centerControlDiv = document.createElement("div");
 	CenterControl(centerControlDiv, map);
-	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
 	
 	const centerRightControlDiv = document.createElement("div");
 	CenterRightControl(centerRightControlDiv, map);
-	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerRightControlDiv);
+	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerRightControlDiv);
+	
+	const ClearControlDiv = document.createElement("div");
+	ClearControl(ClearControlDiv, map);
+	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(ClearControlDiv);
 }
 
 
