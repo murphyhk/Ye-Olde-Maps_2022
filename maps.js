@@ -8,10 +8,10 @@ const berlin = { lat: 52.518, lng: 13.408 };
 const reichstag = { lat: 52.518623, lng: 13.376198 }; // Reichstag building
 
 const BERLIN_BOUNDS = {			// Map boundaires
-				north: 52.700,
-				south: 52.300,
-				east: 13.600,
-				west: 13.200,
+				north: 52.900,
+				south: 52.100,
+				east: 13.800,
+				west: 13.000,
 			};
 
 // ---------	BUTTONS		---------
@@ -177,39 +177,39 @@ function initMap() {
 	let map = new google.maps.Map(
 		document.getElementById('map'), { zoom: 10, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
 
-	// The coordinates for the top-right, bottom-left for map = historicalOverlay
-	let imageBounds = {
-		north: 52.560,
-		south: 52.500,
-		east: 13.528,
-		west: 13.408,
+	// The coordinates for the top-right, bottom-left for map = during war
+	let DuringWarBounds = {
+		north: 52.850,
+		south: 52.150,
+		east: 14.000,
+		west: 12.800,
 	};
-	// The coordinates for the top-right, bottom-left for map = historicalOverlay1
-	let imageBounds1 = {
-		north: 52.600,
-		south: 52.400,
-		east: 13.588,
-		west: 13.228,
+	// The coordinates for the top-right, bottom-left for map = prewar
+	let PreWarBounds = {
+		north: 52.700,
+		south: 52.350,
+		east: 13.700,
+		west: 13.100,
 	};
-	// The coordinates for the top-right, bottom-left for map = historicalOverlay1
-	let imageBounds2 = {
-		north: 52.560,
-		south: 52.500,
-		east: 13.528,
-		west: 13.408,
+	// The coordinates for the top-right, bottom-left for map = post war
+	let PostWarBounds = {
+		north: 52.750,
+		south: 52.250,
+		east: 13.800,
+		west: 12.900,
 	};
 
 	// The loading code for the pre war map image
 	preWar = new google.maps.GroundOverlay(
-		"https://upload.wikimedia.org/wikipedia/commons/3/39/Kiessling%27s_Neuer_kleiner_Plan_von_Berlin_1898_B.jpg", imageBounds1
+		"https://upload.wikimedia.org/wikipedia/commons/3/39/Kiessling%27s_Neuer_kleiner_Plan_von_Berlin_1898_B.jpg", PreWarBounds
 	);
 	// The loding code for the during war map image
 	duringWar = new google.maps.GroundOverlay(
-		"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/1945_Soviet_map_of_Berlin.jpg/2411px-1945_Soviet_map_of_Berlin.jpg", imageBounds
+		"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/1945_Soviet_map_of_Berlin.jpg/2411px-1945_Soviet_map_of_Berlin.jpg", DuringWarBounds
 	);
 	// The loading code for the post war map image
 	postWar = new google.maps.GroundOverlay(
-		"https://upload.wikimedia.org/wikipedia/commons/3/34/The_Berlin_region._LOC_90682667_%28cropped%29.jpg", imageBounds2
+		"https://upload.wikimedia.org/wikipedia/commons/3/34/The_Berlin_region._LOC_90682667_%28cropped%29.jpg", PostWarBounds
 	);
 	
 	// Set the map overlay to start on during war image
