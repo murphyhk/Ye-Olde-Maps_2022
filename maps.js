@@ -137,6 +137,7 @@ function ClearControl(controlDiv, map) {
 		duringWar.setMap(null);
 		preWar.setMap(null);
 		postWar.setMap(null);
+		removeMarkers();
 	});
 	
 }
@@ -222,8 +223,6 @@ function initMap() {
 	duringWar.setMap(map);
 
 	// ---------	CONTENTS MARKERS	---------
-
-	PreWarMarkers();
 
 	//Array for storing markers
 	var markers = [];
