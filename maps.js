@@ -9,6 +9,11 @@ const reichstag = { lat: 52.518623, lng: 13.376198 }; // Reichstag building
 const pergamonmuseum = {lat: 52.521183, log: 13.3969}; // Pergamon Museum Building
 const brandenburg = {lat: 52.516266, log:13.377775}; // Brandenburg Gate
 
+//Arrays fro holding marker objects
+var preWarMarkers = [];
+var duringWarMarkers = [];
+var postWarMarkers = [];
+
 
 const BERLIN_BOUNDS = {			// Map boundaires
 				north: 52.900,
@@ -54,7 +59,19 @@ function CenterLeftControl(controlDiv, map) {
 		duringWar.setMap(null);
 		postWar.setMap(null);
 		preWar.setMap(map);
-		PreWarMarkers();
+
+		//show pre war markers
+		preWarMarkers.forEach(element => {
+			element.setMap(map);
+		});
+		//hide during war markers
+		duringWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		//Hide post war markers
+		postWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
 	});
 	
 }
@@ -96,7 +113,19 @@ function CenterRightControl(controlDiv, map) {
 		duringWar.setMap(null);
 		preWar.setMap(null);
 		postWar.setMap(map);
-		PostWarMarkers();
+
+		//hide pre war markers
+		preWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		//hide during war markers
+		duringWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		//show post war markers
+		postWarMarkers.forEach(element => {
+			element.setMap(map);
+		});
 	});
 	
 }
@@ -137,7 +166,17 @@ function ClearControl(controlDiv, map) {
 		duringWar.setMap(null);
 		preWar.setMap(null);
 		postWar.setMap(null);
-		removeMarkers();
+
+		//hide all markers
+		preWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		duringWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		postWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
 	});
 	
 }
@@ -175,7 +214,19 @@ function CenterControl(controlDiv, map) {
 		preWar.setMap(null);
 		postWar.setMap(null);
 		duringWar.setMap(map);
-		DuringWarMarkers();
+
+		//hide pre war markers
+		preWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
+		//Show during war markers
+		duringWarMarkers.forEach(element => {
+			element.setMap(map);
+		});
+		//hide post war markers
+		postWarMarkers.forEach(element => {
+			element.setMap(null);
+		});
 	});
 }
 // ---------	MAPS	---------
@@ -224,125 +275,46 @@ function initMap() {
 
 	// ---------	CONTENTS MARKERS	---------
 
-	//Array for storing markers
-	var markers = [];
-	//Array storing all the info windows for the markers
-	var infoWindows = [];	
-
-
-
-	//function that removes the current markers from the map
-	function removeMarkers() {
-		for (var i in markers) {
-			markers[i].setMap(null);
-			infoWindows[i].close(); // close the info window
-		}
-		markers = []; // reset markers array
-		infoWindows = []; // reset infowindow array
-	}
-
-	function PreWarMarkers(){
-
-		//Remove current markers
-		removeMarkers();
-
-		//Create info windows and markers
-		//Marker and window 1
-		const contentString1 =
+	var preWarLocations = [
+		['Reichstag', 52.518623, 13.376198, 
 			'<div id="content">' +
-			'<div id="siteNotice">' +
+	 		'<div id="siteNotice">' +
 			"</div>" +
-			'<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
-			'<div id="BodyContent">' +
-			"<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>" +
-			"<img src='https://images.adsttc.com/media/images/5624/75e8/e58e/cec3/c400/0353/newsletter/Bundesarchiv_Bild_102-13744__Berlin__Reichstag__Verfassungsfeier.jpg?1445230051' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
-			"<img src='https://i0.wp.com/rylandscollections.com/wp-content/uploads/2015/04/reichstag_thumb.jpg?ssl=1' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
-			"<img src='https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2016/08/1024px-1895_reichstagsgebaeude.jpg' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
-			"</div>" +
-			"</div>";
-		const infowindow1 = new google.maps.InfoWindow({
-			content: contentString1
-		});
-		const marker1 = new google.maps.Marker({
-			position: reichstag,
-			map,
-			title: "Reichstag Bulding",
-		});
-		marker1.addListener("click", () => {
-			infowindow1.open({
-				anchor: marker1,
-				map,
-				shouldFocus: false,
-			});
-		});
+	 		'<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
+	 		'<div id="BodyContent">' +
+	 		"<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>" +
+	 		"<img src='https://images.adsttc.com/media/images/5624/75e8/e58e/cec3/c400/0353/newsletter/Bundesarchiv_Bild_102-13744__Berlin__Reichstag__Verfassungsfeier.jpg?1445230051' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	 		"<img src='https://i0.wp.com/rylandscollections.com/wp-content/uploads/2015/04/reichstag_thumb.jpg?ssl=1' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	 		"<img src='https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2016/08/1024px-1895_reichstagsgebaeude.jpg' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	 		"</div>" +
+	 		"</div>"
+		],
+		['Pergamonmuseum', 52.521183, 13.3969,
+		 	'<div id="content">' +
+		 	'<div id="siteNotice">' +
+		 	"</div>" +
+		 	'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+		 	'<div id="BodyContent">' +
+		 	"<p>The <b>Pergamon Museum</b> was constructed from 1910 - 1930 by order of the then current German Emperor Wilhelm II and was finally opened in 1930</p>" +
+		 	"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Berlin_Pergamonmuseum_1905.jpg/791px-Berlin_Pergamonmuseum_1905.jpg?20081213094740' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+		 	"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Pergamon_Museum_in_Berlin.jpg/800px-Pergamon_Museum_in_Berlin.jpg?20160720161511' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+		 	"</div>" +
+		 	"</div>"
+		],
+		['Brandenburg', 52.516266, 13.377775, 
+			 	'<div id="content">' +
+			 	'<div id="siteNotice">' +
+			 	"</div>" +
+			 	'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+			 	'<div id="BodyContent">' +
+			 	"<p>The <b>Brandenburg Gate</b> was built from 1788 to 1791 by order of the Prussian king Frederick Wilhelm II, and marks the start of the road from Berlin to Brandenburg</p>" +
+			 	"</div>" +
+			 	"</div>"
+		]
+	];
 
-		const contentString2 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
-		'<div id="BodyContent">' +
-		"<p>The <b>Pergamon Museum</b> was constructed from 1910 - 1930 by order of the then current German Emperor Wilhelm II and was finally opened in 1930</p>" +
-		"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Berlin_Pergamonmuseum_1905.jpg/791px-Berlin_Pergamonmuseum_1905.jpg?20081213094740' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
-		"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Pergamon_Museum_in_Berlin.jpg/800px-Pergamon_Museum_in_Berlin.jpg?20160720161511' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
-		"</div>" +
-		"</div>";
-		const infowindow2 = new google.maps.InfoWindow({
-			content: contentString2
-		});
-		const marker2 = new google.maps.Marker({
-			position: pergamonmuseum,
-			map,
-			title: "Pergamon Museum",
-		});
-		marker2.addListener("click", () => {
-			infowindow2.open({
-				anchor: marker2,
-				map,
-				shouldFocus: false,
-			});
-		});
-
-		const contentString3 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
-		'<div id="BodyContent">' +
-		"<p>The <b>Brandenburg Gate</b> was built from 1788 to 1791 by order of the Prussian king Frederick Wilhelm II, and marks the start of the road from Berlin to Brandenburg</p>" +
-		"</div>" +
-		"</div>";
-		const infowindow3 = new google.maps.InfoWindow({
-			content: contentString3
-		});
-		const marker3 = new google.maps.Marker({
-			position: brandenburg,
-			map,
-			title: "Brandenburg Gate",
-		});
-		marker3.addListener("click", () => {
-			infowindow3.open({
-				anchor: marker3,
-				map,
-				shouldFocus: false,
-			});
-		});
-
-		//Add all the info windows to the array
-		infoWindows.push(infowindow1, infowindow2, infowindow3);
-
-		//Add all markers to the array
-		markers.push(marker1, marker2, marker3);
-	}
-
-	function DuringWarMarkers(){
-
-		//Remove current markers
-		removeMarkers();
-
-		//Create info windows and markers
-		//Marker and window 1
-		const contentString1 =
+	var duringWarLocations = [
+		['Reichstag', 52.518623, 13.376198, 
 			'<div id="content">' +
 			'<div id="siteNotice">' +
 			"</div>" +
@@ -353,93 +325,37 @@ function initMap() {
 			"<img src='https://www.facinghistory.org/sites/default/files/Ch05_Image07.JPG?timestamp=1645757978' width='200' height='200' alt='Reichstag Building - During WWII'>" +
 			"<img src='https://qph.cf2.quoracdn.net/main-qimg-3ca083a30ba9db67b2c5f19d716b0936.webp' width='200' height='200' alt='Reichstag Building - During WWII'>" +
 			"</div>" +
-			"</div>";
-		const infowindow1 = new google.maps.InfoWindow({
-			content: contentString1
-		});
-		const marker1 = new google.maps.Marker({
-			position: reichstag,
-			map,
-			title: "Reichstag Bulding",
-		});
-		marker1.addListener("click", () => {
-			infowindow1.open({
-				anchor: marker1,
-				map,
-				shouldFocus: false,
-			});
-		});
+			"</div>"
+		],
+		['Pergamonmuseum', 52.521183, 13.3969,
+			'<div id="content">' +
+			'<div id="siteNotice">' +
+			"</div>" +
+			'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+			'<div id="BodyContent">' +
+			"<p>The <b>Pergamon Museum</b> was heavily damaged in air raids towards the end of WWII, and was not restored until After WWII had ended.</p>" +
+			"<img src='https://davidchipperfield.com/img/N2t1bjlqcmJ3V01DYXNtcnNXdTNaUT09/346_02_smb_zentralarchiv_n3.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
+			"<img src='https://davidchipperfield.com/img/MktxYkgyUUhRT2pBL3VmUkVncHV2dz09/346_02_smb_zentralarchiv_1958_n1.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
+			"</div>" +
+			"</div>"
+		],
+		['Brandenburg', 52.516266, 13.377775, 
+			'<div id="content">' +
+			'<div id="siteNotice">' +
+			"</div>" +
+			'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+			'<div id="BodyContent">' +
+			"<p>The <b>Brandenburg Gate</b> was on of the few iconic structures still standing after WWII, only sustaining minor damage while the buldings around it stood in ruins</p>" +
+			"<img src='https://static.dw.com/image/18295185_403.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+			"<img src='https://wartraveller.com/wp-content/uploads/2018/02/brandenbrug-900x654.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+			"<img src='https://goeasyberlin.de/wp-content/uploads/2016/11/Brandenburg_Gate-Cold-War.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+			"</div>" +
+			"</div>"
+		]
+	];
 
-		const contentString2 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
-		'<div id="BodyContent">' +
-		"<p>The <b>Pergamon Museum</b> was heavily damaged in air raids towards the end of WWII, and was not restored until After WWII had ended.</p>" +
-		"<img src='https://davidchipperfield.com/img/N2t1bjlqcmJ3V01DYXNtcnNXdTNaUT09/346_02_smb_zentralarchiv_n3.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
-		"<img src='https://davidchipperfield.com/img/MktxYkgyUUhRT2pBL3VmUkVncHV2dz09/346_02_smb_zentralarchiv_1958_n1.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
-		"</div>" +
-		"</div>";
-		const infowindow2 = new google.maps.InfoWindow({
-			content: contentString2
-		});
-		const marker2 = new google.maps.Marker({
-			position: pergamonmuseum,
-			map,
-			title: "Pergamon Museum",
-		});
-		marker2.addListener("click", () => {
-			infowindow2.open({
-				anchor: marker2,
-				map,
-				shouldFocus: false,
-			});
-		});
-
-		const contentString3 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
-		'<div id="BodyContent">' +
-		"<p>The <b>Brandenburg Gate</b> was on of the few iconic structures still standing after WWII, only sustaining minor damage while the buldings around it stood in ruins</p>" +
-		"<img src='https://static.dw.com/image/18295185_403.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
-		"<img src='https://wartraveller.com/wp-content/uploads/2018/02/brandenbrug-900x654.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
-		"<img src='https://goeasyberlin.de/wp-content/uploads/2016/11/Brandenburg_Gate-Cold-War.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
-		"</div>" +
-		"</div>";
-		const infowindow3 = new google.maps.InfoWindow({
-			content: contentString3
-		});
-		const marker3 = new google.maps.Marker({
-			position: brandenburg,
-			map,
-			title: "Brandenburg Gate",
-		});
-		marker3.addListener("click", () => {
-			infowindow3.open({
-				anchor: marker3,
-				map,
-				shouldFocus: false,
-			});
-		});
-
-		//Add all the info windows to the array
-		infoWindows.push(infowindow1, infowindow2, infowindow3);
-
-		//Add all markers to the array
-		markers.push(marker1, marker2, marker3);
-	}
-
-	function PostWarMarkers(){
-
-		//Remove current markers
-		removeMarkers();
-
-		//Create info windows and markers
-		//Marker and window 1
-		const contentString1 =
+	var postWarLocations = [
+		['Reichstag', 52.518623, 13.376198, 
 			'<div id="content">' +
 			'<div id="siteNotice">' +
 			"</div>" +
@@ -450,84 +366,416 @@ function initMap() {
 			"<img src='https://cdn.britannica.com/45/101845-004-AB9DCB0D/Reichstag-Norman-Foster-renovations-Berlin.jpg?w=300&h=169&c=crop' width='200' height='200' alt='Reichstag Building - Post WWII'>" +
 			"<img src='https://i3.wp.com/rachelsruminations.com/wp-content/uploads/2016/11/PA203956-e1480536318451.jpg' width='200' height='200' alt='Reichstag Building - Post WWII'>" +
 			"</div>" +
-			"</div>";
-		const infowindow1 = new google.maps.InfoWindow({
-			content: contentString1
-		});
-		const marker1 = new google.maps.Marker({
-			position: reichstag,
-			map,
-			title: "Reichstag Bulding",
-		});
-		marker1.addListener("click", () => {
-			infowindow1.open({
-				anchor: marker1,
-				map,
-				shouldFocus: false,
-			});
-		});
+			"</div>"
+		],
+		['Pergamonmuseum', 52.521183, 13.3969,
+			'<div id="content">' +
+			'<div id="siteNotice">' +
+			"</div>" +
+			'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+			'<div id="BodyContent">' +
+			"<p>The <b>Pergamon Museum</b> after the war was slowly fixed, and eventually renovated in 1999, where it still stands as a UNESCO World Heritage Site.</p>" +
+			"<img src='https://www.inexhibit.com/wp-content/webp-express/webp-images/uploads/2014/07/Pergamon-Museum-Berlin-Ishtar-Gate-870x580.jpg.webp' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
+			"<img src='https://upload.wikimedia.org/wikipedia/commons/4/46/Pergamonmuseum_Front.jpg' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
+			"</div>" +
+			"</div>"
+		],
+		['Brandenburg', 52.516266, 13.377775, 
+			'<div id="content">' +
+			'<div id="siteNotice">' +
+			"</div>" +
+			'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+			'<div id="BodyContent">' +
+			"<p>After the minor repairs required for it were completed in 1989, the <b>Brandenburg Gate</b> was reopened and stand as one of Germany's most famous landmarks to this day</p>" +
+			"<img src='https://static.dw.com/image/52796179_101.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+			"<img src='https://media.cntraveler.com/photos/5b914e80d5806340ca438db1/16:9/w_2560,c_limit/BrandenburgGate_2018_GettyImages-549093677.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+			"<img src='https://www.erco.com/images/brandenburg-gate-1314/eur-og-1314.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+			"</div>" +
+			"</div>"
+		]
+	];
 
-		const contentString2 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
-		'<div id="BodyContent">' +
-		"<p>The <b>Pergamon Museum</b> after the war was slowly fixed, and eventually renovated in 1999, where it still stands as a UNESCO World Heritage Site.</p>" +
-		"<img src='https://www.inexhibit.com/wp-content/webp-express/webp-images/uploads/2014/07/Pergamon-Museum-Berlin-Ishtar-Gate-870x580.jpg.webp' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
-		"<img src='https://upload.wikimedia.org/wikipedia/commons/4/46/Pergamonmuseum_Front.jpg' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
-		"</div>" +
-		"</div>";
-		const infowindow2 = new google.maps.InfoWindow({
-			content: contentString2
-		});
-		const marker2 = new google.maps.Marker({
-			position: pergamonmuseum,
-			map,
-			title: "Pergamon Museum",
-		});
-		marker2.addListener("click", () => {
-			infowindow2.open({
-				anchor: marker2,
-				map,
-				shouldFocus: false,
-			});
-		});
+	var infowindow = new google.maps.InfoWindow();
 
-		const contentString3 =
-		'<div id="content">' +
-		'<div id="siteNotice">' +
-		"</div>" +
-		'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
-		'<div id="BodyContent">' +
-		"<p>After the minor repairs required for it were completed in 1989, the <b>Brandenburg Gate</b> was reopened and stand as one of Germany's most famous landmarks to this day</p>" +
-		"<img src='https://static.dw.com/image/52796179_101.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
-		"<img src='https://media.cntraveler.com/photos/5b914e80d5806340ca438db1/16:9/w_2560,c_limit/BrandenburgGate_2018_GettyImages-549093677.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
-		"<img src='https://www.erco.com/images/brandenburg-gate-1314/eur-og-1314.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
-		"</div>" +
-		"</div>";
-		const infowindow3 = new google.maps.InfoWindow({
-			content: contentString3
-		});
-		const marker3 = new google.maps.Marker({
-			position: brandenburg,
-			map,
-			title: "Brandenburg Gate",
-		});
-		marker3.addListener("click", () => {
-			infowindow3.open({
-				anchor: marker3,
-				map,
-				shouldFocus: false,
-			});
-		});
+	var marker, i;
+	  
+	//loop for creating THe pre war markers
+	for (i = 0; i < preWarLocations.length; i++) {
+	  
+	  preWarMarkers.push(
+		  new google.maps.Marker({
+			  position: new google.maps.LatLng(preWarLocations[i][1], preWarLocations[i][2]),
+			  map: map
+			})
+	  );
 
-		//Add all the info windows to the array
-		infoWindows.push(infowindow1, infowindow2, infowindow3);
-
-		//Add all markers to the array
-		markers.push(marker1, marker2, marker3);
+	  marker = preWarMarkers[i];
+	  
+	  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		return function() {
+		  infowindow.setContent(preWarLocations[i][3]);
+		  infowindow.open(map, marker);
+		}
+	  })(marker, i));
 	}
+	//loop for creating during war markers
+	for (i = 0; i < duringWarLocations.length; i++) {
+	  
+		duringWarMarkers.push(
+			new google.maps.Marker({
+				position: new google.maps.LatLng(duringWarLocations[i][1], duringWarLocations[i][2]),
+				map: map
+			  })
+		);
+  
+		marker = duringWarMarkers[i];
+		
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		  return function() {
+			infowindow.setContent(duringWarLocations[i][3]);
+			infowindow.open(map, marker);
+		  }
+		})(marker, i));
+	}
+	//loop for creating during war markers
+	for (i = 0; i < postWarLocations.length; i++) {
+	  
+		postWarMarkers.push(
+			new google.maps.Marker({
+				position: new google.maps.LatLng(postWarLocations[i][1], postWarLocations[i][2]),
+				map: map
+			  })
+		);
+  
+		marker = postWarMarkers[i];
+		
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		  return function() {
+			infowindow.setContent(postWarLocations[i][3]);
+			infowindow.open(map, marker);
+		  }
+		})(marker, i));
+	}
+
+	//hide pre war markers
+	preWarMarkers.forEach(element => {
+		element.setMap(null);
+	});
+	//Show during war markers
+	duringWarMarkers.forEach(element => {
+		element.setMap(map);
+	});
+	//hide post war markers
+	postWarMarkers.forEach(element => {
+		element.setMap(null);
+	});
+
+	// Initialise page with during world war 2 markers
+
+	// //Array for storing markers
+	// var markers = [];
+	// //Array storing all the info windows for the markers
+	// var infoWindows = [];	
+
+
+
+	// //function that removes the current markers from the map
+	// function removeMarkers() {
+	// 	for (var i in markers) {
+	// 		markers[i].setMap(null);
+	// 		infoWindows[i].close(); // close the info window
+	// 	}
+	// 	markers = []; // reset markers array
+	// 	infoWindows = []; // reset infowindow array
+	// }
+
+	// function PreWarMarkers(){
+
+	// 	//Remove current markers
+	// 	removeMarkers();
+
+	// 	//Create info windows and markers
+	// 	//Marker and window 1
+	// 	const contentString1 =
+	// 		'<div id="content">' +
+	// 		'<div id="siteNotice">' +
+	// 		"</div>" +
+	// 		'<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
+	// 		'<div id="BodyContent">' +
+	// 		"<p>The <b>Reichstag Building</b> was built in 1894 to house the Imperial Diet of the German Empire after the unification of the German Empire in 1871</p>" +
+	// 		"<img src='https://images.adsttc.com/media/images/5624/75e8/e58e/cec3/c400/0353/newsletter/Bundesarchiv_Bild_102-13744__Berlin__Reichstag__Verfassungsfeier.jpg?1445230051' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	// 		"<img src='https://i0.wp.com/rylandscollections.com/wp-content/uploads/2015/04/reichstag_thumb.jpg?ssl=1' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	// 		"<img src='https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2016/08/1024px-1895_reichstagsgebaeude.jpg' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	// 		"</div>" +
+	// 		"</div>";
+	// 	const infowindow1 = new google.maps.InfoWindow({
+	// 		content: contentString1
+	// 	});
+	// 	const marker1 = new google.maps.Marker({
+	// 		position: reichstag,
+	// 		map,
+	// 		title: "Reichstag Bulding",
+	// 	});
+	// 	marker1.addListener("click", () => {
+	// 		infowindow1.open({
+	// 			anchor: marker1,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString2 =
+	// 	'<div id="content">' +
+	// 	'<div id="siteNotice">' +
+	// 	"</div>" +
+	// 	'<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+	// 	'<div id="BodyContent">' +
+	// 	"<p>The <b>Pergamon Museum</b> was constructed from 1910 - 1930 by order of the then current German Emperor Wilhelm II and was finally opened in 1930</p>" +
+	// 	"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Berlin_Pergamonmuseum_1905.jpg/791px-Berlin_Pergamonmuseum_1905.jpg?20081213094740' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	// 	"<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Pergamon_Museum_in_Berlin.jpg/800px-Pergamon_Museum_in_Berlin.jpg?20160720161511' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+	// 	"</div>" +
+	// 	"</div>";
+	// 	const infowindow2 = new google.maps.InfoWindow({
+	// 		content: contentString2
+	// 	});
+	// 	const marker2 = new google.maps.Marker({
+	// 		position: pergamonmuseum,
+	// 		map,
+	// 		title: "Pergamon Museum",
+	// 	});
+	// 	marker2.addListener("click", () => {
+	// 		infowindow2.open({
+	// 			anchor: marker2,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString3 =
+	// 	'<div id="content">' +
+	// 	'<div id="siteNotice">' +
+	// 	"</div>" +
+	// 	'<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+	// 	'<div id="BodyContent">' +
+	// 	"<p>The <b>Brandenburg Gate</b> was built from 1788 to 1791 by order of the Prussian king Frederick Wilhelm II, and marks the start of the road from Berlin to Brandenburg</p>" +
+	// 	"</div>" +
+	// 	"</div>";
+	// 	const infowindow3 = new google.maps.InfoWindow({
+	// 		content: contentString3
+	// 	});
+	// 	const marker3 = new google.maps.Marker({
+	// 		position: brandenburg,
+	// 		map,
+	// 		title: "Brandenburg Gate",
+	// 	});
+	// 	marker3.addListener("click", () => {
+	// 		infowindow3.open({
+	// 			anchor: marker3,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	//Add all the info windows to the array
+	// 	infoWindows.push(infowindow1, infowindow2, infowindow3);
+
+	// 	//Add all markers to the array
+	// 	markers.push(marker1, marker2, marker3);
+	// }
+
+	// function DuringWarMarkers(){
+
+	// 	//Remove current markers
+	// 	removeMarkers();
+
+	// 	//Create info windows and markers
+	// 	//Marker and window 1
+	// 	const contentString1 =
+			// '<div id="content">' +
+			// '<div id="siteNotice">' +
+			// "</div>" +
+			// '<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
+			// '<div id="BodyContent">' +
+			// "<p>The <b>Reichstag Building</b> was burnt down in 1933, exactly 4 weeks before the swearing in of Adolf Hitler as Chancellor of Germany. The <b>Reichstag Building</b> wasnt restored until after the war.</p>" +
+			// "<img src='https://th-thumbnailer.cdn-si-edu.com/xlo7wE5K64ZZmTytx87JpjnMnT8=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/5a/cf/5acf1c49-c598-40f7-8f35-8d282a43536e/reichstagsbrand-web.jpg' width='200' height='200' alt='Reichstag Building - Pre 1933'>" +
+			// "<img src='https://www.facinghistory.org/sites/default/files/Ch05_Image07.JPG?timestamp=1645757978' width='200' height='200' alt='Reichstag Building - During WWII'>" +
+			// "<img src='https://qph.cf2.quoracdn.net/main-qimg-3ca083a30ba9db67b2c5f19d716b0936.webp' width='200' height='200' alt='Reichstag Building - During WWII'>" +
+			// "</div>" +
+			// "</div>";
+	// 	const infowindow1 = new google.maps.InfoWindow({
+	// 		content: contentString1
+	// 	});
+	// 	const marker1 = new google.maps.Marker({
+	// 		position: reichstag,
+	// 		map,
+	// 		title: "Reichstag Bulding",
+	// 	});
+	// 	marker1.addListener("click", () => {
+	// 		infowindow1.open({
+	// 			anchor: marker1,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString2 =
+		// '<div id="content">' +
+		// '<div id="siteNotice">' +
+		// "</div>" +
+		// '<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+		// '<div id="BodyContent">' +
+		// "<p>The <b>Pergamon Museum</b> was heavily damaged in air raids towards the end of WWII, and was not restored until After WWII had ended.</p>" +
+		// "<img src='https://davidchipperfield.com/img/N2t1bjlqcmJ3V01DYXNtcnNXdTNaUT09/346_02_smb_zentralarchiv_n3.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
+		// "<img src='https://davidchipperfield.com/img/MktxYkgyUUhRT2pBL3VmUkVncHV2dz09/346_02_smb_zentralarchiv_1958_n1.jpg' width='200' height='200' alt='Pergamon Museum - During WWII'>" +
+		// "</div>" +
+		// "</div>";
+	// 	const infowindow2 = new google.maps.InfoWindow({
+	// 		content: contentString2
+	// 	});
+	// 	const marker2 = new google.maps.Marker({
+	// 		position: pergamonmuseum,
+	// 		map,
+	// 		title: "Pergamon Museum",
+	// 	});
+	// 	marker2.addListener("click", () => {
+	// 		infowindow2.open({
+	// 			anchor: marker2,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString3 =
+		// '<div id="content">' +
+		// '<div id="siteNotice">' +
+		// "</div>" +
+		// '<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+		// '<div id="BodyContent">' +
+		// "<p>The <b>Brandenburg Gate</b> was on of the few iconic structures still standing after WWII, only sustaining minor damage while the buldings around it stood in ruins</p>" +
+		// "<img src='https://static.dw.com/image/18295185_403.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+		// "<img src='https://wartraveller.com/wp-content/uploads/2018/02/brandenbrug-900x654.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+		// "<img src='https://goeasyberlin.de/wp-content/uploads/2016/11/Brandenburg_Gate-Cold-War.jpg' width='200' height='200' alt='Brandenburg Gate - During WWII'>" +
+		// "</div>" +
+		// "</div>";
+	// 	const infowindow3 = new google.maps.InfoWindow({
+	// 		content: contentString3
+	// 	});
+	// 	const marker3 = new google.maps.Marker({
+	// 		position: brandenburg,
+	// 		map,
+	// 		title: "Brandenburg Gate",
+	// 	});
+	// 	marker3.addListener("click", () => {
+	// 		infowindow3.open({
+	// 			anchor: marker3,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	//Add all the info windows to the array
+	// 	infoWindows.push(infowindow1, infowindow2, infowindow3);
+
+	// 	//Add all markers to the array
+	// 	markers.push(marker1, marker2, marker3);
+	// }
+
+	// function PostWarMarkers(){
+
+	// 	//Remove current markers
+	// 	removeMarkers();
+
+	// 	//Create info windows and markers
+	// 	//Marker and window 1
+	// 	const contentString1 =
+			// '<div id="content">' +
+			// '<div id="siteNotice">' +
+			// "</div>" +
+			// '<h1 id="firstHeading" class="firstHeading">Reichstag building</h1>' +
+			// '<div id="BodyContent">' +
+			// "<p>The reconstruction of the <b>Reichstag Building</b> began on the 3rd of October 1990, and was finally completed in 1993, where it still stands to this day. The <b>Reichstag</b> is now used to hold the German Parliament</p>" +
+			// "<img src='https://cdn.theculturetrip.com/wp-content/uploads/2016/08/reichstag_building_berlin_view_from_west_before_sunset.jpg' width='200' height='200' alt='Reichstag Building - Post WWII'>" +
+			// "<img src='https://cdn.britannica.com/45/101845-004-AB9DCB0D/Reichstag-Norman-Foster-renovations-Berlin.jpg?w=300&h=169&c=crop' width='200' height='200' alt='Reichstag Building - Post WWII'>" +
+			// "<img src='https://i3.wp.com/rachelsruminations.com/wp-content/uploads/2016/11/PA203956-e1480536318451.jpg' width='200' height='200' alt='Reichstag Building - Post WWII'>" +
+			// "</div>" +
+			// "</div>";
+	// 	const infowindow1 = new google.maps.InfoWindow({
+	// 		content: contentString1
+	// 	});
+	// 	const marker1 = new google.maps.Marker({
+	// 		position: reichstag,
+	// 		map,
+	// 		title: "Reichstag Bulding",
+	// 	});
+	// 	marker1.addListener("click", () => {
+	// 		infowindow1.open({
+	// 			anchor: marker1,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString2 =
+		// '<div id="content">' +
+		// '<div id="siteNotice">' +
+		// "</div>" +
+		// '<h1 id="firstHeading" class="firstHeading">Pergamon Museum</h1>' +
+		// '<div id="BodyContent">' +
+		// "<p>The <b>Pergamon Museum</b> after the war was slowly fixed, and eventually renovated in 1999, where it still stands as a UNESCO World Heritage Site.</p>" +
+		// "<img src='https://www.inexhibit.com/wp-content/webp-express/webp-images/uploads/2014/07/Pergamon-Museum-Berlin-Ishtar-Gate-870x580.jpg.webp' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
+		// "<img src='https://upload.wikimedia.org/wikipedia/commons/4/46/Pergamonmuseum_Front.jpg' width='200' height='200' alt='Pergamon Museum - Post WWII'>" +
+		// "</div>" +
+		// "</div>";
+	// 	const infowindow2 = new google.maps.InfoWindow({
+	// 		content: contentString2
+	// 	});
+	// 	const marker2 = new google.maps.Marker({
+	// 		position: pergamonmuseum,
+	// 		map,
+	// 		title: "Pergamon Museum",
+	// 	});
+	// 	marker2.addListener("click", () => {
+	// 		infowindow2.open({
+	// 			anchor: marker2,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	const contentString3 =
+		// '<div id="content">' +
+		// '<div id="siteNotice">' +
+		// "</div>" +
+		// '<h1 id="firstHeading" class="firstHeading">Brandenburg Gate</h1>' +
+		// '<div id="BodyContent">' +
+		// "<p>After the minor repairs required for it were completed in 1989, the <b>Brandenburg Gate</b> was reopened and stand as one of Germany's most famous landmarks to this day</p>" +
+		// "<img src='https://static.dw.com/image/52796179_101.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+		// "<img src='https://media.cntraveler.com/photos/5b914e80d5806340ca438db1/16:9/w_2560,c_limit/BrandenburgGate_2018_GettyImages-549093677.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+		// "<img src='https://www.erco.com/images/brandenburg-gate-1314/eur-og-1314.jpg' width='200' height='200' alt='Brandenburg Gate - Post WWII'>" +
+		// "</div>" +
+		// "</div>";
+	// 	const infowindow3 = new google.maps.InfoWindow({
+	// 		content: contentString3
+	// 	});
+	// 	const marker3 = new google.maps.Marker({
+	// 		position: brandenburg,
+	// 		map,
+	// 		title: "Brandenburg Gate",
+	// 	});
+	// 	marker3.addListener("click", () => {
+	// 		infowindow3.open({
+	// 			anchor: marker3,
+	// 			map,
+	// 			shouldFocus: false,
+	// 		});
+	// 	});
+
+	// 	//Add all the info windows to the array
+	// 	infoWindows.push(infowindow1, infowindow2, infowindow3);
+
+	// 	//Add all markers to the array
+	// 	markers.push(marker1, marker2, marker3);
+	// }
 
 
 	// ---------	BUTTON IMPLEMENTATIONS ---------
