@@ -102,7 +102,7 @@ ul li a:hover{
 
 .content .cn a{
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: black;
     transition: .3s ease;
 }
 
@@ -118,7 +118,7 @@ ul li a:hover{
 
 .cities{
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image1.jpg.jpg) ;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image3.jpg.jpg) ;
     background-position: center;
     background-size: cover;
     height: 109vh;
@@ -150,15 +150,15 @@ ul li a:hover{
 }
 
 
+
 .contacts{
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image3.jpg.jpg) ;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image2.jpg.jpg) ;
     background-position: center;
     background-size: cover;
     height: 109vh;
     color: white;
 }
-
 
 .contacts h1{
     font-family: 'Times New Roman';
@@ -184,6 +184,8 @@ ul li a:hover{
     height: 109vh;
     color: white;
 }
+
+
 .about h1{
     font-family: 'Times New Roman';
     font-size: 80px;
