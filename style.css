@@ -171,6 +171,7 @@ ul li a:hover{
 .maps{
     width: 100%;
     background-image: url(image1.jpg.jpg) ;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image.jpg.jpg) ;
     background-position: center;
     background-size: stretch;
     height: 109px;
@@ -193,6 +194,7 @@ ul li a:hover{
     margin-top: 9%;
     letter-spacing: 2px;
 }
+
 #map {
 	height: 600px;
 	width: 60%;
