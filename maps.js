@@ -131,11 +131,13 @@ function CenterControl(controlDiv, map) {
 		duringWar.setMap(map);
 	});
 }
+
+
 // ---------	MAPS	---------
 function initMap() {
 
 	let map = new google.maps.Map(
-		document.getElementById('map'), { zoom: 12, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
+		document.getElementById('map'), { zoom: 10, center: berlin, restriction: { latLngBounds: BERLIN_BOUNDS, strictBounds: false}});
 
 	// The coordinates for the top-right, bottom-left for map = historicalOverlay
 	let imageBounds = {
@@ -163,7 +165,7 @@ function initMap() {
 	preWar = new google.maps.GroundOverlay(
 		"https://upload.wikimedia.org/wikipedia/commons/3/39/Kiessling%27s_Neuer_kleiner_Plan_von_Berlin_1898_B.jpg", imageBounds1
 	);
-	// The loding code for the during war map image
+	// The loading code for the during war map image
 	duringWar = new google.maps.GroundOverlay(
 		"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/1945_Soviet_map_of_Berlin.jpg/2411px-1945_Soviet_map_of_Berlin.jpg", imageBounds
 	);
