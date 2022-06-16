@@ -9,7 +9,7 @@ const reichstag = { lat: 52.518623, lng: 13.376198 }; // Reichstag building
 const pergamonmuseum = {lat: 52.521183, log: 13.3969}; // Pergamon Museum Building
 const brandenburg = {lat: 52.516266, log:13.377775}; // Brandenburg Gate
 
-//Arrays fro holding marker objects
+//Arrays for holding marker objects
 var preWarMarkers = [];
 var duringWarMarkers = [];
 var postWarMarkers = [];
