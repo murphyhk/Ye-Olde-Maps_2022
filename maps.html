@@ -28,8 +28,18 @@
             <p class="par">Berlin is the capital and largest city if Germany by both area and population <br> it has a population of 3.7 million inhabitants make it the Europen unions most populous city.<br> The Website is under construction.</p>
 
         </div>
+        <div class="range">
+            <div class="sliderValue">
+            </div>
+            <div class="field">
+                <input type="range" min="0" max="100" value="50" steps="1"
+                onchange="rangeValue(this.value)"
+                onmousemove="rangeValue(this.value)">
+            </div>
+        </div>
         <div id="map"></div>
         <script src="maps.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZtGX6yWJVdGJHYm9zVEk5m8vSWEcqaY&callback=initMap&v=weekly"></script>
+        
 </body>
 </html>

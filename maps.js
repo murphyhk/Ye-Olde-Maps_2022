@@ -229,6 +229,8 @@ function CenterControl(controlDiv, map) {
 		});
 	});
 }
+
+
 // ---------	MAPS	---------
 function initMap() {
 
@@ -261,7 +263,7 @@ function initMap() {
 	preWar = new google.maps.GroundOverlay(
 		"https://upload.wikimedia.org/wikipedia/commons/3/39/Kiessling%27s_Neuer_kleiner_Plan_von_Berlin_1898_B.jpg", PreWarBounds
 	);
-	// The loding code for the during war map image
+	// The loading code for the during war map image
 	duringWar = new google.maps.GroundOverlay(
 		"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/1945_Soviet_map_of_Berlin.jpg/2411px-1945_Soviet_map_of_Berlin.jpg", DuringWarBounds
 	);
