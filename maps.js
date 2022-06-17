@@ -273,7 +273,7 @@ function initMap() {
 	);
 	
 	// Set the map overlay to start on during war image
-	duringWar.setMap(map);
+	//duringWar.setMap(map);
 
 	// ---------	CONTENTS MARKERS	---------
 
