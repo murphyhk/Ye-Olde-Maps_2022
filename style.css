@@ -164,7 +164,7 @@ ul li a:hover{
     font-family: 'Times New Roman';
     font-size: 50px;
     padding-left: 20px;
-    margin-top: 9%;
+    margin-top: 2%;
     letter-spacing: 2px;
 }
 
@@ -178,7 +178,7 @@ ul li a:hover{
 
 .about{
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image1.jpg.jpg) ;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5)50%,  rgba(0,0,0,0.5)50%), url(image1.jpg.jpg) ;
     background-position: center;
     background-size: cover;
     height: 109vh;
