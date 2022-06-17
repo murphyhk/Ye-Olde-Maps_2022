@@ -465,7 +465,7 @@ function initMap() {
 	});
 	//Show during war markers
 	duringWarMarkers.forEach(element => {
-		element.setMap(map);
+		element.setMap(null);
 	});
 	//hide post war markers
 	postWarMarkers.forEach(element => {
