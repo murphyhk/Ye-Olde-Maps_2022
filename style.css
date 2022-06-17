@@ -76,6 +76,7 @@ ul li a:hover{
     font-family: 'Times New Roman';
     letter-spacing: 1.2px;
     line-height: 30px;
+    
 
 }
 
@@ -168,9 +169,15 @@ ul li a:hover{
     letter-spacing: 2px;
     color: white;
 }
-.contacts p{
+.contacts a{
     font-family: 'Times New Roman', Times, serif;
     font-size: medium;
+    /*background-color: lightgrey;*/
+    width: 300px;
+    /*border: 15px solid orange;*/
+    padding: 50px;
+    margin: 20px;
+    color: #fff;
 }
 
 .maps{
