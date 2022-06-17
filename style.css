@@ -171,11 +171,6 @@ ul li a:hover{
 .contacts p{
     font-family: 'Times New Roman', Times, serif;
     font-size: medium;
-    background-color: lightgrey;
-    width: 300px;
-    border: 15px solid orange;
-    padding: 50px;
-    margin: 20px;
 }
 
 .maps{
@@ -183,8 +178,9 @@ ul li a:hover{
     background-image: url(image1.jpg.jpg) ;
     background: linear-gradient(to top, rgba(0,0,0,0.5)50%,  rgba(0,0,0,0.5)50%), url(image.jpg) ;
     background-position: center;
-    background-size: stretch;
-    height: 109px;
+    background-size: contain;
+    height: 100%;
+
 }
 
 .about{
@@ -194,6 +190,7 @@ ul li a:hover{
     background-size: cover;
     height: 109vh;
     color: white;
+    
 }
 
 
@@ -206,8 +203,8 @@ ul li a:hover{
 }
 
 #map {
-	height: 600px;
-	width: 60%;
+	height: 450px;
+	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 }
